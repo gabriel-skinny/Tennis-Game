@@ -13,9 +13,17 @@ div.text{
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 div.text h1{
   font-size: 22px;
   width: 300px;
+  
+
+  justify-self: flex-end;
+}
+
+div.text h1:nth-child(2){
+  text-align: right;
 }
