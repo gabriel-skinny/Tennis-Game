@@ -13,12 +13,14 @@ var goal2Y = 200;
 const GOAL_HEIGHT = 100;
 
 var ballX = 0;
-var ballSpeedX = 1;
+var ballSpeedX = 5;
 var ballY = 0;
-var ballSpeedY = 1;
+var ballSpeedY = 5;
 
 var goal1Points = 0;
 var goal2Points = 0;
+
+var moveBall = true;
 
 window.onload = function(){
   window.addEventListener("keypress", move)
@@ -28,20 +30,34 @@ window.onload = function(){
   this.setInterval(function(){
 
     drawEverthing();
-    moveEverthing();
+    
+    if (moveBall === true){
+      moveEverthing();
+    }
 
   }, framesPerSecond/1000)
+}
+
+function stopBall(pharse){
+  moveBall = false;
+  window.alert(pharse)
 }
 
 function ballReset(goal1Point, goal2Point){
   if (goal1Point){
     goal1Points++;
     PointGoal1Text.innerHTML = `Pontos: ${goal1Points}`;
+    if (goal1Points >= 5){
+      stopBall("Gol 1 ganhou");
+    }
   }
 
   if(goal2Point){
     goal2Points++;
     PointGoal2Text.innerHTML = `Pontos: ${goal2Points}`;
+    if (goal2Points >= 5){
+      stopBall('Gol 2 ganhou');
+    }
   }
   
   ballSpeedX = -ballSpeedX;
@@ -108,8 +124,6 @@ function shapeCircleCanvas(drawColor, centerX, centerY, size){
 
 
 function move(e){
-  console.log(e.keyCode)
-
   switch(e.keyCode){
     case 119:
       if (goal1Y >= 10){
